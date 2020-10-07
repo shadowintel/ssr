@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+declare const $: any;
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ransomware-leak';
+  ngOnInit() { }
+
+  removeclass() {
+    $('body').removeClass('mobile-nav-active');
+    $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
+    $('.mobile-nav-overly').fadeOut();
+  }
 }
