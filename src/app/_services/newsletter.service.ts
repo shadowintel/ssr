@@ -9,7 +9,7 @@ export class NewsletterService {
   sendinblueApi = environment.sendinblueApi;
   apiUrl = environment.apiUrl;
   listId = 11;
-  apiKey = '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'
+  apiKey = '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'
   constructor(
     private http: HttpClient
   ) { }
