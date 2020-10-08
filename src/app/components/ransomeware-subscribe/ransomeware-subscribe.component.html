@@ -1,0 +1,87 @@
+<div class="alert-part p-5" style="padding-bottom: 10px !important;">
+    <div class="alert alert-danger alert-dismissible fade show" *ngIf="(isSubscribeSuccess === 'failed' && isSent === true) || (isBusiness === false && isSent === true)">
+        <button type="button" class="close" data-dismiss="alert" (click)="closeAlert()">&times;</button>
+        <!-- <strong>Warning!</strong> -->
+        <ng-container *ngIf="isBusiness">
+            {{ errorMessage }}
+        </ng-container>
+        <ng-container *ngIf="!isBusiness">
+            Please provide a corporate email to subscribe.
+        </ng-container>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" *ngIf="isSubscribeSuccess === 'success' && isSent ===true">
+        <button type="button" class="close" data-dismiss="alert" (click)="closeAlert()">&times;</button>
+        <strong>Success!</strong> Subscribe is done successfully.
+    </div>
+</div>
+<div class="subscribe-form">
+    <form class="text-left border border-light p-5" style="padding-top: 10px !important;" [formGroup]="subscribeForm" (ngSubmit)="onSubmit()">
+        <!-- Email -->
+        <label>Please provide the following information to subscribe to notifications:</label>
+        <input type="email" formControlName="email" id="defaultContactFormEmail" class="form-control" placeholder="E-mail">
+        <p class="input-error" *ngIf="isControlHasError('email','required')">Email is required</p>
+        <p class="input-error" *ngIf="isControlHasError('email','email')">Invalid Email</p>
+        <!-- industry -->
+        <label class="mt-2">Industry</label>
+        <select formControlName="industry" class="selectpicker browser-default custom-select">
+            <option value="" disabled>Choose Industry</option>
+            <ng-container *ngFor="let industryItem of industriesData">
+                <option [value]="industryItem.value">{{industryItem.view}}</option>
+            </ng-container>
+        </select>
+        <a href="javascript:void(0);" [ngStyle]="{'display': activedIndustry == ''? '': 'none'}" class="tooltip-custom">
+            <span class="fa fa-info-circle" data-placement="right" data-toggle="tooltip" data-html="true"
+                data-original-title="<div>Choose an industry to view included sectors.</div>">
+            </span>
+        </a>
+        <a href="javascript:void(0);" [ngStyle]="{'display': activedIndustry == 'TM'? '': 'none'}" class="tooltip-custom">
+            <span class="fa fa-info-circle" data-placement="right" data-toggle="tooltip" data-html="true"
+                data-original-title="<div><ul class='insurance-tooltip'><li>Information Technology</li><li>Information Security</li><li>Telecommunications</li><li>Media</li></ul></div>">
+            </span>
+        </a>
+        <a href="javascript:void(0);" [ngStyle]="{'display': activedIndustry == 'FS'? '': 'none'}" class="tooltip-custom">
+            <span class="fa fa-info-circle" data-placement="right" data-toggle="tooltip" data-html="true"
+                data-original-title="<div><ul class='insurance-tooltip'><li>Banking</li><li>Insurance</li><li>Real Estate</li><li>Diversified Financial Services</li></ul></div>">
+            </span>
+        </a>
+        <a href="javascript:void(0);" [ngStyle]="{'display': activedIndustry == 'LS'? '': 'none'}" class="tooltip-custom">
+            <span class="fa fa-info-circle" data-placement="right" data-toggle="tooltip" data-html="true"
+                data-original-title="<div><ul class='insurance-tooltip'><li>Pharmaceuticals & Biotechnology</li><li>Healthcare</li><li>Cosmetics</li><li>Physical Training</li></ul></div>">
+            </span>
+        </a>
+        <a href="javascript:void(0);" [ngStyle]="{'display': activedIndustry == 'MI'? '': 'none'}" class="tooltip-custom">
+            <span class="fa fa-info-circle" data-placement="right" data-toggle="tooltip" data-html="true"
+                data-original-title="<div><ul class='insurance-tooltip'><li>Automotive</li><li>Logistics Infrastructure</li><li>Aviation</li><li>Materials</li><li>Energy</li><li>Construction & Demolition</li><li>Technology</li></ul></div>">
+            </span>
+        </a>
+        <a href="javascript:void(0);" [ngStyle]="{'display': activedIndustry == 'PCS'? '': 'none'}" class="tooltip-custom">
+            <span class="fa fa-info-circle" data-placement="right" data-toggle="tooltip" data-html="true"
+                data-original-title="<div><ul class='insurance-tooltip'><li>Retail</li><li>Logistics</li><li>Legal</li><li>Facilities</li><li>Travel</li><li>Entertainment</li></ul></div>">
+            </span>
+        </a>
+        <a href="javascript:void(0);" [ngStyle]="{'display': activedIndustry == 'PS'? '': 'none'}" class="tooltip-custom">
+            <span class="fa fa-info-circle" data-placement="right" data-toggle="tooltip" data-html="true"
+                data-original-title="<div><ul class='insurance-tooltip'><li>Education</li><li>Utilities</li><li>Government</li><li>Transportation</li><li>Non-profit</li></ul></div>">
+            </span>
+        </a>
+        <a href="javascript:void(0);" [ngStyle]="{'display': activedIndustry == 'AL'? '': 'none'}" class="tooltip-custom">
+            <span class="fa fa-info-circle" data-placement="right" data-toggle="tooltip" data-html="true"
+                data-original-title="<div>You can subscribe to all industries</div>">
+            </span>
+        </a>
+        <p class="input-error" *ngIf="isControlHasError('industry','required')">Please select Industry</p>
+        <!-- Type -->
+        <label class="mt-2">Time Interval</label>
+        <select formControlName="type" class="browser-default custom-select">
+            <option value="" disabled>Choose Notification Type</option>
+            <ng-container *ngFor="let notificationItem of notificationTypes">
+                <option value="{{ notificationItem.value }}">{{ notificationItem.view }}</option>
+            </ng-container>
+        </select>
+        <p class="input-error" *ngIf="isControlHasError('type','required')">Please select subscribe type</p>
+        <input type="checkbox" class="mt-2" formControlName="agree" style="margin-right: 5px;">
+        <span>I agree to receive your newsletters and accept the data privacy statement.</span>
+        <button class="btn btn-md btn-block mt-2" type="submit" [disabled]="!getAgree">Subscribe</button>
+    </form>
+</div>

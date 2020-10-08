@@ -12,6 +12,27 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 
+// var jsdom = require('jsdom').jsdom
+// var myWindow = jsdom().createWindow()
+// var $ = require('jQuery')
+// var jq = require('jQuery').create()
+// var jQuery = require('jQuery').create(myWindow)
+
+const domino = require('domino');
+const fs = require('fs');
+const path = require('path');
+console.log('this is directory: ', __dirname)
+const template = fs.readFileSync(path.join(__dirname, '../','browser', 'index.html')).toString();
+const win = domino.createWindow(template);
+global['window'] = win;
+global['document'] = win.document;
+global['$']=require('jQuery')
+global["branch"] = null;
+global["object"] = win.object;
+global['HTMLElement'] = win.HTMLElement;
+global['navigator'] = win.navigator;
+
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();

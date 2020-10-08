@@ -5,8 +5,9 @@
             <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
                 <img src="../assets/img/txt.png" style="width: 100%;">
             </div>
-            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
-                <ng-lottie containerClass="moving-box img-fluid animated" [styles]="styles" [options]="options"></ng-lottie>
+            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
+                <ng-lottie containerClass="moving-box img-fluid animated" [styles]="styles" [options]="options">
+                </ng-lottie>
             </div>
         </div>
     </div>
@@ -40,5 +41,16 @@
     </section>
     <!-- End About Us Section -->
 
-
+    <section id="ransomwareleaks" class="ransomwareleaks">
+        <div class="container">
+            <div class="main-leaks">
+                <div class="section-title aos-init aos-animate" data-aos="fade-up">
+                    <h2>Ransomware</h2>
+                </div>
+                <div class="Ransomware-content" data-aos="fade-up" style="margin-top: -50px;">
+                    <app-ransomeware-subscribe></app-ransomeware-subscribe>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
