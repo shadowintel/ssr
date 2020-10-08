@@ -5,13 +5,13 @@ import { PieRansomwareComponent } from './pie-ransomware/pie-ransomware.componen
 import { BubbleMapComponent } from './bubble-map/bubble-map.component';
 import { RevenueTableComponent } from './revenue-table/revenue-table.component';
 import { RevenueTableElementComponent } from './revenue-table-element/revenue-table-element.component';
-// import { PipesModule } from '../pipes/pipes.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [ColumnStackedComponent, PieRansomwareComponent, BubbleMapComponent, RevenueTableComponent, RevenueTableElementComponent],
   imports: [
     CommonModule,
-    // PipesModule
+    PipesModule
   ],
   exports: [
     ColumnStackedComponent,
