@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NewsletterService } from '../../_services';
+import { NgbModalConfig, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../environments/environment';
+
 declare const $: any;
 @Component({
   selector: 'app-ransomeware-subscribe',
@@ -91,14 +95,20 @@ export class RansomewareSubscribeComponent implements OnInit, AfterViewInit {
   errorMessage: string = '';
   activedIndustry: string = '';
   tooltipTexts = '';
-  
+  apiUrl = environment.apiUrl;
+  userSubscribeData: { type: string; industry: string; };
+  public mr: NgbModalRef;
+
+  @ViewChild("modalContent", { static: false }) modalContent;
+  userData: any;
+
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    // private newsletterService: NewsletterService,
+    private newsletterService: NewsletterService,
     private formBuilder: FormBuilder,
-    // config: NgbModalConfig,
-    // private modalService: NgbModal
+    config: NgbModalConfig,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -151,50 +161,131 @@ export class RansomewareSubscribeComponent implements OnInit, AfterViewInit {
       return;
     };
 
-    // this.isSent = true;
-    // this.isBusiness = this.checkBusinessEmail(controls.email.value);
-    // console.log('isBusiness: ', this.isBusiness)
-    // if (!this.isBusiness) {
-    //   return;
+    this.isSent = true;
+    this.isBusiness = this.checkBusinessEmail(controls.email.value);
+    console.log('isBusiness: ', this.isBusiness)
+    if (!this.isBusiness) {
+      return;
+    }
+
+    this.spinner.show('infoSpinner');
+    let listIds = []
+
+    this.compareData.map((item) => {
+      if (item.industry === controls.industry.value && item.notificationType === controls.type.value) {
+        listIds.push(item.listId);
+      }
+    });
+
+    const subData = {
+      "email": controls.email.value,
+      "listIds": listIds,
+      "attributes": {
+        "DOUBLE_OPT-IN": true,
+        "OPT-IN": true
+      }
+    }
+
+    console.log('sudData: ', subData)
+    this.newsletterService.addContactToList(subData).subscribe((res: any) => {
+      console.log('subscribe success: ', res);
+      this.spinner.show('infoSpinner');
+      this.initForm();
+      this.isSubscribeSuccess = 'success';
+      setTimeout(() => {
+        this.closeAlert();
+      }, 2000);
+    }, (error) => {
+      console.log('subscribe failed: ', error);
+      if (error.error.code === 'duplicate_parameter') {
+        this.reSubscribe(subData);
+      } else {
+        this.errorMessage = error.error.message;
+        this.isSubscribeSuccess = 'failed';
+        this.spinner.hide('infoSpinner');
+      }
+    })
+  }
+
+  closeAlert() {
+    this.isSent = false;
+    this.isSubscribeSuccess = 'pending'
+  }
+
+  reSubscribe(subData) {
+    this.newsletterService.getUserData(subData.email).subscribe((res: any) => {
+      this.userData = res.userData;
+      if (subData.listIds[0] === this.userData.listIds[0]) {
+        // console.log('sameYYY', subData, this.userData)
+        this.spinner.hide('infoSpinner');
+        this.isSubscribeSuccess = 'failed';
+        this.errorMessage = "You are already subscribing this service";
+        return
+      }
+
+      const userSubsribeData = this.compareData.filter((item) => {
+        return item.listId === this.userData.listIds[0];
+      });
+
+      if (userSubsribeData.length > 0) {
+        this.userSubscribeData = {
+          type: userSubsribeData[0].notificationType,
+          industry: userSubsribeData[0].view
+        }
+      } else {
+        this.userSubscribeData = {
+          type: 'live',
+          industry: ''
+        }
+      };
+
+      console.log('already registered user data: ', this.userSubscribeData)
+
+      this.mr = this.modalService.open(this.modalContent, {centered: true});
+    }, (error) => {
+      console.log('update failed: ', error)
+      this.errorMessage = "Subscribe is failed, Please contact support team";
+      this.isSubscribeSuccess = 'failed';
+      this.spinner.hide('infoSpinner');
+    })
+  }
+
+  updateSubscribe() {
+    const controls = this.subscribeForm.controls;
+    let listIds = [];
+    this.compareData.map((item) => {
+      if (item.industry === controls.industry.value && item.notificationType === controls.type.value) {
+        listIds.push(item.listId);
+      }
+    });
+    const toUdpateContactData = {
+      listIds: listIds,
+      unlinkListIds: this.userData.listIds
+    }
+    this.newsletterService.updateContact(this.userData['id'], toUdpateContactData).subscribe((res: any) => {
+      console.log('update is done successfully: ', res)
+      this.mr.close();
+      this.initForm();
+      this.isSubscribeSuccess = 'success';
+      setTimeout(() => {
+        this.closeAlert();
+      }, 2000);
+    }, (error) => {
+      this.mr.close();
+      this.errorMessage = "Subscribe is failed, Please contact support team";
+      this.isSubscribeSuccess = 'failed';
+      this.spinner.hide('infoSpinner');
+      console.log('udpate is failed: ', error)
+    })
+  }
+
+  checkBusinessEmail(userEmail: string) {
+    // you can disable all mail
+    //  if (userEmail.endsWith('@gmail.com') || userEmail.endsWith('@protonmail.com') || userEmail.endsWith('@yandex.com') || userEmail.endsWith('@hotmail.com') || userEmail.endsWith('@yahoo.com')) {
+    // if (userEmail.endsWith('@protonmail.com') || userEmail.endsWith('@yandex.com') || userEmail.endsWith('@hotmail.com') || userEmail.endsWith('@yahoo.com')) {
+    //   rturn false;
     // }
-
-    // this.showSpinner('infoSpinner');
-    // let listIds = []
-
-    // this.compareData.map((item) => {
-    //   if (item.industry === controls.industry.value && item.notificationType === controls.type.value) {
-    //     listIds.push(item.listId);
-    //   }
-    // });
-
-    // const subData = {
-    //   "email": controls.email.value,
-    //   "listIds": listIds,
-    //   "attributes": {
-    //     "DOUBLE_OPT-IN": true,
-    //     "OPT-IN": true
-    //   }
-    // }
-
-    // console.log('sudData: ', subData)
-    // this.newsletterService.addContactToList(subData).subscribe((res: any) => {
-    //   console.log('subscribe success: ', res);
-    //   this.hideSpinner('infoSpinner');
-    //   this.initForm();
-    //   this.isSubscribeSuccess = 'success';
-    //   setTimeout(() => {
-    //     this.closeAlert();
-    //   }, 2000);
-    // }, (error) => {
-    //   console.log('subscribe failed: ', error);
-    //   if (error.error.code === 'duplicate_parameter') {
-    //     this.reSubscribe(subData);
-    //   } else {
-    //     this.errorMessage = error.error.message;
-    //     this.isSubscribeSuccess = 'failed';
-    //     this.hideSpinner('infoSpinner');
-    //   }
-    // })
+    return true;
   }
 
   get getAgree() {

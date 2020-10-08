@@ -85,3 +85,17 @@
         <button class="btn btn-md btn-block mt-2" type="submit" [disabled]="!getAgree">Subscribe</button>
     </form>
 </div>
+
+<ng-template #modalContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Hello!</h4>
+    </div>
+    <div class="modal-body">
+        <p>You are already subscribed to <span style="color: red;">{{userSubscribeData["industry"]}}</span> <span style="color: #1acea1; text-transform: capitalize;"> {{userSubscribeData["type"]}}</span></p>
+        <p>Do you want to update your subscription preferences?</p>
+    </div>
+    <div class="modal-footer" style="margin: auto;">
+        <button type="button" class="btn" aria-label="Close" (click)="d('Cross click')">Cancel</button>
+        <button type="button" class="btn" (click)="updateSubscribe()">Update</button>
+    </div>
+</ng-template>
