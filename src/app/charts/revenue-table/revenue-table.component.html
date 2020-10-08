@@ -1,0 +1,9 @@
+<div class="row">
+    <ng-container *ngFor="let revenueElement of revenueData; index as i">
+        {{index}}
+        <div class="col-md-6 col-sm-12" style="padding: 20px">
+            <app-revenue-table-element [index]="i" [title]="revenueElement._id" [revenue]="revenueElement.avgRevenue" [total]="revenueElement.totalValue" [clients]="revenueElement.avgEmployees">
+            </app-revenue-table-element>
+        </div>
+    </ng-container>
+</div>

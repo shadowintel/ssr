@@ -9,12 +9,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -23,8 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     HttpClientModule,
     NgxSpinnerModule,
+    PipesModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

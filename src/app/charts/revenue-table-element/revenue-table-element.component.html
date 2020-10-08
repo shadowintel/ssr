@@ -1,0 +1,31 @@
+<div class="row revneue revenue-border" [ngStyle]="{'border-color': color? color: 'red'}">
+    <div class="col-12 revenue-border revenue-padding" [ngStyle]="{'border-color': color? color: 'red'}">
+        <p class="revenue-title" [ngStyle]="{'color': color? color: 'red'}">
+            {{title}} - 30 days
+        </p>
+    </div>
+    <div class="col-4 revenue-border revenue-padding" style="border-top: 1px solid; border-right: 1px solid;" [ngStyle]="{'border-color': color? color: 'red'}">
+        <p class="revenue-subtitle">
+            Avg. Victim Revenue
+        </p>
+        <p class="revenue-value">
+            {{ revenue | numberSuffix }}
+        </p>
+    </div>
+    <div class="col-4 revenue-border revenue-padding" style="border-top: 1px solid;" [ngStyle]="{'border-color': color? color: 'red'}">
+        <p class="revenue-subtitle">
+            Avg. # of Employees
+        </p>
+        <p class="revenue-value">
+            {{ clients | number:'1.0-0'}}
+        </p>
+    </div>
+    <div class="col-4 revenue-border revenue-padding" style="border-top: 1px solid; border-left: 1px solid;" [ngStyle]="{'border-color': color? color: 'red'}">
+        <p class="revenue-subtitle">
+            Total number of Victims
+        </p>
+        <p class="revenue-value">
+            {{ total | numberSuffix }}
+        </p>
+    </div>
+</div>
