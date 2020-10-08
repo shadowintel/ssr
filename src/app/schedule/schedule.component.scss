@@ -1,0 +1,107 @@
+.schedule-container {
+    min-height: 95vh;
+}
+
+.data-title-part {
+    font-size: 24px;
+    color: #00b698;
+}
+
+.data-title-part .date-text {
+    color: red;
+}
+
+.schedule-container {
+    padding: 0px 30px;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+table tr th {
+    background-image: linear-gradient(to right, #006867, #00b698);
+    color: white;
+}
+
+.industry {
+    color: black;
+}
+
+.invalid-request {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+}
+
+.invalid-request p {
+    font-size: 32px;
+    color: red;
+    text-align: center;
+}
+
+.logo-image {
+    height: 172px;
+}
+
+@media screen and (max-width: 600px) {
+     ::ng-deep .dataTables_wrapper .dataTables_length {
+        text-align: left;
+    }
+     ::ng-deep .dataTables_wrapper .dataTables_filter {
+        text-align: left;
+    }
+     ::ng-deep .paging_full_numbers {
+        font-size: 12px;
+    }
+    .logo-image {
+        width: 100%;
+        height: auto;
+    }
+    .data-title-part {
+        font-size: 18px;
+    }
+    table {
+        border: 0;
+    }
+    table caption {
+        font-size: 1.3em;
+    }
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    table td::before {
+        /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    table td:last-child {
+        text-align: justify !important;
+        border-bottom: 0;
+    }
+}

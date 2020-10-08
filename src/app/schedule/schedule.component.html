@@ -1,0 +1,52 @@
+<section id="schedule-section" class="d-flex align-items-center">
+    <div class="schedule-container">
+        <div>
+            <img class="logo-image" src="https://ci4.googleusercontent.com/proxy/6B9pejk_gyHZYK8DqsKUWXpaZ5BvkbdV2Et7jzlHK9Q0OSvBqCjG8_CjZv_JHSnom_R5zlI-NIw8-94P4y9Zwb7AqOOcguyvCohd9fzFdseoBJK-mIOv46b4rhBs4UsOibFnrBDdwTXik_IhJ8eRwAY4XwCCIKIFA3Hx2l_0YdpfNp6kWxvleGebRP9E53QS96rAaNd5IU3VwOeE_whWygduvhFpnz7pvO7t2KKDCeGmv5LtIrBSQFhMvbheEa2vlFxdF6xJ7ILh4v6ibKuhi2NQ8G64jtvLfazt7YUV6m75CXjfIapemx8hsf5pk6lVg7LdBFypUcWGdyCuYw-xlAK9zkG3GYhNrnv0az6EC-h85XA6BrytShzb0mZHwUICLjW9E2IoUqX-npWdEp6n7flCq1Gl2BohhoDGyY-B7Zu0ghXndgU53gSZ-909ZuTtuf2HOrSkfJbkzXtxMFggKOaDKOpK3RSh20XCCHlJdNFCUG51CnE6mI2BW29YKz8naLpQJ7A-w9A=s0-d-e1-ft#http://5csuw.img.a.d.sendibm1.com/im/3019788/17672fa172896cbfc5e92ecf4577676086092a515f681b9115dfeda8645227bd.png?e=vRTe8vysddfC2Mt0di6QTwDyBargGDTJRuu0PZLQDnIFRlrhs-QEk2cBL2Ape0G3_oLDFdJGFTxNYIWP5vzQTQlEr6VvoQgQKG4zICyocnc_9j2mWTDeyzr1u98P82cdPub-fNu1eeV2PnuX7ljvCLYIS0Vp_qlecvuFrpAQExmiMaThPfB7C5qGrO0MfoTAQWEuyy4QeJKHdcOJ808DLO_BDvZnM4w9c1PARRPsRQ22hKBpd3DL30JwosX73l-e">
+        </div>
+        <div *ngIf="isInvalid" class="invalid-request">
+            <p>Invalid Request</p>
+        </div>
+        <div class="data-title-part" style="margin-top: 30px">
+            <p *ngIf="newsletterData.type === 'daily'">Ransomware <span class="industry">{{industry}}</span> on <span class="date-text">{{newsletterData?.startDate}}</span></p>
+            <p *ngIf="newsletterData.type === 'weekly'">Ransomware <span class="industry">{{industry}}</span> from <span class="date-text">{{newsletterData?.startDate}}</span> to <span class="date-text">{{newsletterData?.endDate}}</span></p>
+            <p *ngIf="newsletterData.type === 'monthly'">Ransomware <span class="industry">{{industry}}</span> from <span class="date-text">{{newsletterData?.startDate}}</span> to <span class="date-text">{{newsletterData?.endDate}}</span></p>
+        </div>
+        <!-- no data -->
+        <div *ngIf="newsletterData['type'] && tableData.length == 0 && !isInvalid" class="invalid-request">
+            <p>No Data</p>
+        </div>
+        <!-- /no data -->
+        <table datatable id="datatables" [dtOptions]="dtOptions" class="row-border hover" *ngIf="tableData.length > 0">
+            <thead>
+                <tr>
+                    <th>Ransomware</th>
+                    <th>Title</th>
+                    <th>Industry</th>
+                    <th>Sector</th>
+                    <th>Country</th>
+                    <th>ISO2</th>
+                    <th>Revenue</th>
+                    <th>Employees</th>
+                    <th>URL</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dataItem of tableData">
+                    <td data-label="Ransomware">{{dataItem["ransomware"]}}</td>
+                    <td data-label="Title">{{dataItem["title"]}}</td>
+                    <td data-label="Industry">{{dataItem["industry"]}}</td>
+                    <td data-label="Sector">{{dataItem["sector"]}}</td>
+                    <td data-label="Country">{{dataItem["country"]}}</td>
+                    <td data-label="ISO2">{{dataItem["iso2"]}}</td>
+                    <td data-label="Revenue">${{ dataItem["revenue"] | numberSuffix }}</td>
+                    <td data-label="Employees">{{dataItem["employees"] | number:'1.0-0' }}</td>
+                    <td data-label="URL">
+                        <a href="{{dataItem['victim_url']}}">{{dataItem['victim_url']}}</a>
+                    </td>
+                    <td data-label="Description :">{{dataItem["description"]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

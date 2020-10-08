@@ -15,10 +15,14 @@ const routes: Routes = [
     path: 'blog',
     loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
   },
-  // {
-  //   path: '**',
-  //   redirectTo: 'home'
-  // }
+  {
+    path: 'schedule/:id',
+    loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
+  }
 ];
 
 @NgModule({
