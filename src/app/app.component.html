@@ -1,23 +1,4 @@
 <app-header></app-header>
-<nav class="mobile-nav d-lg-none">
-    <ul>
-        <li>
-            <a [routerLink]="['']" (click)="removeclass()">Home</a>
-        </li>
-        <li>
-            <a [routerLink]="['']" fragment="about" (click)="removeclass()">About</a>
-        </li>
-        <li>
-            <a [routerLink]="['']" fragment="ransomwareleaks" (click)="removeclass()">Ransomware</a>
-        </li>
-        <li>
-            <a [routerLink]="['/blog/list']" fragment="blog">Blog</a>
-        </li>
-        <li>
-            <a [routerLink]="['']" fragment="contact" (click)="removeclass()">Contact</a>
-        </li>
-    </ul>
-</nav>
 <ngx-spinner bdColor="rgba(248,242,242,0.8)" size="medium" color="#1acea1" type="ball-atom" [fullScreen]="true">
     <p style="color: #1acea1">Loading...</p>
 </ngx-spinner>

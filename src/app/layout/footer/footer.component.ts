@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-// import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -9,13 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 
   constructor(
-    // private router: Router,
-    // private route: ActivatedRoute
+    private renderer: Renderer2
   ) {
-    // router.events.subscribe((url: any) => console.log(url));
   }
 
   ngOnInit(): void {
   }
 
+  scrollToTarget(idName: string) {
+    console.log('header')
+    const element = this.renderer.selectRootElement(`#${idName}`, true); // true to indicate that you will preserve the content
+
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
 }

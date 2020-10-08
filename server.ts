@@ -26,7 +26,6 @@ const template = fs.readFileSync(path.join(__dirname, '../','browser', 'index.ht
 const win = domino.createWindow(template);
 global['window'] = win;
 global['document'] = win.document;
-global['$']=require('jQuery')
 global["branch"] = null;
 global["object"] = win.object;
 global['HTMLElement'] = win.HTMLElement;

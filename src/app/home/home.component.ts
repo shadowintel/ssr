@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
 import * as AOS from 'aos';
 
@@ -16,10 +16,17 @@ export class HomeComponent implements OnInit {
     maxWidth: 'auto',
     margin: '0 auto',
   };
-  constructor() { }
+  constructor(
+    private renderer: Renderer2
+  ) { }
 
   ngOnInit(): void {
     AOS.init();
+  }
+
+  scrollToTarget(idName: string) {
+    const element = this.renderer.selectRootElement(`#${idName}`, true); // true to indicate that you will preserve the content
+    element.scrollIntoView({ behavior: 'smooth' });
   }
 
 }

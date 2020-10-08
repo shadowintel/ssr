@@ -53,7 +53,7 @@ export class ColumnStackedComponent implements OnInit {
         toolbar: {
           show: true,
           offsetX: 0,
-          offsetY: this.isMobileView ? -270 : 0,
+          offsetY: this.isMobileView ? -0 : 0,
         },
         zoom: {
           enabled: true

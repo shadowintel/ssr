@@ -11,21 +11,41 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li>
-                    <a [routerLink]="['/']" routerLinkActive="active">Home</a>
+                    <a [routerLink]="['/']" routerLinkActive="active" (click)="scrollToTarget('hero')">Home</a>
                 </li>
                 <li>
-                    <a [routerLink]="['']" fragment="about" routerLinkActive="active">About</a>
+                    <a [routerLink]="['']" fragment="about" routerLinkActive="active" (click)="scrollToTarget('about')">About</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/']" fragment="ransomwareleaks" routerLinkActive="active">Ransomware</a>
+                    <a [routerLink]="['/']" fragment="ransomwareleaks" routerLinkActive="active" (click)="scrollToTarget('ransomwareleaks')">Ransomware</a>
                 </li>
                 <li>
                     <a [routerLink]="['/blog/list']">Blog</a>
                 </li>
                 <li class="get-started">
-                    <a [routerLink]="['']" fragment="contact">Contact</a>
+                    <a [routerLink]="['']" fragment="contact" (click)="scrollToTarget('contact')">Contact</a>
                 </li>
             </ul>
         </nav>
     </div>
 </header>
+
+<nav class="mobile-nav d-lg-none">
+    <ul>
+        <li>
+            <a [routerLink]="['']" (click)="removeclass('hero')">Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['']" fragment="about" (click)="removeclass('about')">About</a>
+        </li>
+        <li>
+            <a [routerLink]="['']" fragment="ransomwareleaks" (click)="removeclass('ransomwareleaks')">Ransomware</a>
+        </li>
+        <li>
+            <a [routerLink]="['/blog/list']" fragment="blog" (click)="removeclass('')">Blog</a>
+        </li>
+        <li>
+            <a [routerLink]="['']" fragment="contact" (click)="removeclass('contact')">Contact</a>
+        </li>
+    </ul>
+</nav>

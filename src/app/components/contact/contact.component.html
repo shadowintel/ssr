@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="contact-info col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200" style="margin: 0 auto;">
+        <div class="info">
+            <div>
+                <i class="ri-twitter-fill"></i>
+                <p style="font-size: 18px"><a href="https://twitter.com/shad0wintel">@Shad0wintel</a></p>
+            </div>
+            <div>
+                <i class="ri-mail-send-line"></i>
+                <p style="font-size: 18px">support@shadowintelligence.io</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
+        <div class="alert alert-danger alert-dismissible fade show" *ngIf="sentSuccess === false && isSent === true">
+            <button type="button" class="close" data-dismiss="alert" (click)="closeAlert()">&times;</button>
+            <strong>Failed!</strong> {{ errorMessage }}
+        </div>
+
+        <div class="alert alert-success alert-dismissible fade show" *ngIf="sentSuccess === true && isSent === true">
+            <button type="button" class="close" data-dismiss="alert" (click)="closeAlert()">&times;</button> Thank you for contacting us!.
+        </div>
+        <div class="subscribe-form">
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="text" formControlName="name" class="form-control" id="name" placeholder="Your Name" />
+                    <p class="input-error" *ngIf="isControlHasError('name','required')">Name is required</p>
+                </div>
+                <div class="form-group">
+                    <input type="email" formControlName="email" class="form-control" id="email" placeholder="Your Email" />
+                    <p class="input-error" *ngIf="isControlHasError('email','required')">Email is required</p>
+                    <p class="input-error" *ngIf="isControlHasError('email','email')">Invalid Email</p>
+                </div>
+                <div class="form-group">
+                    <input type="text" formControlName="subject" class="form-control" id="subject" placeholder="Subject" />
+                    <p class="input-error" *ngIf="isControlHasError('subject','required')">Subject is required</p>
+                </div>
+                <div class="form-group">
+                    <textarea formControlName="message" class="form-control" rows="5" placeholder="Message"></textarea>
+                    <p class="input-error" *ngIf="isControlHasError('message','required')">Message is required</p>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-md btn-block mt-2">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
