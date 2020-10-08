@@ -1,0 +1,5 @@
+@media (max-width: 600px) {
+     ::ng-deep app-column-stacked apx-chart div div svg:first-child {
+        min-height: 680px;
+    }
+}

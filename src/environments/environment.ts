@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  sendinblueApi: 'https://api.sendinblue.com/v3',
+  // apiUrl: 'http://localhost:3000/',
+  apiUrl : 'https://expressbackend.shadowintelligence.io/',
 };
 
 /*
