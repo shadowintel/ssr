@@ -2,19 +2,19 @@
 <nav class="mobile-nav d-lg-none">
     <ul>
         <li>
-            <a [routerLink]="['']" routerLinkActive="active" (click)="removeclass()">Home</a>
+            <a [routerLink]="['']" (click)="removeclass()">Home</a>
         </li>
         <li>
-            <a [routerLink]="['']" fragment="about" routerLinkActive="active" (click)="removeclass()">About</a>
+            <a [routerLink]="['']" fragment="about" (click)="removeclass()">About</a>
         </li>
         <li>
-            <a [routerLink]="['']" fragment="ransomwareleaks" routerLinkActive="active" (click)="removeclass()">Ransomware</a>
+            <a [routerLink]="['']" fragment="ransomwareleaks" (click)="removeclass()">Ransomware</a>
         </li>
         <li>
-            <a [routerLink]="['/blog']" fragment="blog" routerLinkActive="active">Blog</a>
+            <a [routerLink]="['/blog/list']" fragment="blog">Blog</a>
         </li>
         <li>
-            <a [routerLink]="['']" fragment="contact" routerLinkActive="active" (click)="removeclass()">Contact</a>
+            <a [routerLink]="['']" fragment="contact" (click)="removeclass()">Contact</a>
         </li>
     </ul>
 </nav>

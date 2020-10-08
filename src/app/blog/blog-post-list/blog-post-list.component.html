@@ -1,0 +1,27 @@
+<section id="blog" class="d-flex align-items-center" style="min-height: 92vh;">
+    <div class="container blog-container">
+        <div class="row content">
+            <div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-6 mt-3" *ngFor="let post of posts">
+                <mat-card class="example-card">
+                    <img *ngIf="post.featured_image" [routerLink]="[post.slug]" src="{{post.featured_image}}" alt="featured image" class="post-image" />
+                    <h4 class="post-published">{{post.published | date}}</h4>
+                    <mat-card-content class="page-body">
+                        <a [routerLink]="[post.slug]" class="post-title">
+                            <div class="blocks">
+                                {{post.title}}
+                            </div>
+                        </a>
+                        <div fxLayout="column" class="summary">
+                            <p>{{post.summary.slice(0, 250) + (post.summary.length > 250 ? " [...]" : "")}}</p>
+                        </div>
+                        <div class="page-footer d-flex" [routerLink]="[post.slug]">
+                            <h6 class="more-text">Read more</h6>
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <ngb-pagination *ngIf="collectionSize" [boundaryLinks]="true" class="d-flex justify-content-center mt-4" [collectionSize]="collectionSize" [(page)]="page" [maxSize]="2" [rotate]="true" id="paginate" (pageChange)="pageChange($event)"></ngb-pagination>
+    </div>
+</section>

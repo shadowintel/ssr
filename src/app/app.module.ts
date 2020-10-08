@@ -24,7 +24,7 @@ import { PipesModule } from './pipes/pipes.module';
     NgbModule,
     HttpClientModule,
     NgxSpinnerModule,
-    PipesModule
+    PipesModule,
   ],
   bootstrap: [AppComponent]
 })

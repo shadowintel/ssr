@@ -12,9 +12,13 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
-    path: '**',
-    redirectTo: 'home'
-  }
+    path: 'blog',
+    loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
+  },
+  // {
+  //   path: '**',
+  //   redirectTo: 'home'
+  // }
 ];
 
 @NgModule({
