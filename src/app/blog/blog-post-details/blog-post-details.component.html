@@ -1,1 +1,28 @@
-<p>blog-post-details works!</p>
+<section id="blogDetails" class="d-flex align-items-center">
+    <div class="container blog-detail-container">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card class="post-detail-header-wrapper">
+                    <div class="post-detail-header">
+                        <h2>{{post.data?.title}}</h2>
+                    </div>
+                    <div class="pushished-date">
+                        {{post.data?.published | date}}
+                    </div>
+                </mat-card>
+
+                <mat-card class="post-detail-image-wrapper" *ngIf="post.data?.featured_image">
+                    <div class="post-detail-image">
+                        <img [src]="post.data?.featured_image" class="w-100" />
+                    </div>
+                </mat-card>
+
+                <mat-card class="post-detail-content-wrapper">
+                    <div class="post-detail-content">
+                        <div class="post-body" [innerHTML]="post.data?.body"></div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</section>

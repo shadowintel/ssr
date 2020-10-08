@@ -1,0 +1,41 @@
+.blog-detail-container {
+    margin-top: 50px;
+}
+
+.post-detail-header-wrapper {
+    margin-bottom: 20px;
+    padding: 0px;
+}
+
+.post-detail-header {
+    background: #1acea1;
+    color: white;
+    padding: 20px;
+}
+
+.post-detail-header h2 {
+    font-weight: 600;
+}
+
+.pushished-date {
+    padding: 15px;
+}
+
+.post-detail-image-wrapper {
+    padding: 0px;
+    margin-bottom: 20px;
+}
+
+
+/* ::ng-deep figure img {
+  max-width: 400px;
+} */
+
+::ng-deep .post-body img {
+    width: 100%;
+    height: auto;
+}
+
+::ng-deep .post-body pre {
+    white-space: normal;
+}
