@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 declare const $: any;
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',

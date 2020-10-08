@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ButterCMSService } from '../../_services';
 
 @Component({
@@ -18,25 +19,30 @@ export class BlogPostListComponent implements OnInit {
   public previous_page: any;
   public count: any;
 
-  constructor() { }
+  constructor(
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
     this.pageLoad(this.page);
   }
 
   pageLoad(page) {
+    this.spinner.show('loading...');
     console.log(page);
     ButterCMSService.post.list({
       page: page,
       page_size: 10
     }).then((res) => {
       this.posts = res.data.data;
-      if(res.data.meta.count % 10 !== 0) {
+      if (res.data.meta.count % 10 !== 0) {
         this.collectionSize = (Math.floor(res.data.meta.count / 10) + 1) * 10;
       } else {
         this.collectionSize = res.data.meta.count;
       }
       console.log('post list: ', this.posts, this.collectionSize)
+    }).finally(() => {
+      this.spinner.hide();
     });
   }
 
