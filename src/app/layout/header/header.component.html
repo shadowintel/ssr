@@ -19,9 +19,9 @@
                 <li>
                     <a [routerLink]="['/']" fragment="ransomwareleaks" routerLinkActive="active" (click)="scrollToTarget('ransomwareleaks')">Ransomware</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a [routerLink]="['/apis/guide']" routerLinkActive="active">API</a>
-                </li>
+                </li> -->
                 <li>
                     <a [routerLink]="['/blog/list']">Blog</a>
                 </li>
@@ -44,9 +44,9 @@
         <li>
             <a [routerLink]="['']" fragment="ransomwareleaks" (click)="removeclass('ransomwareleaks')">Ransomware</a>
         </li>
-        <li>
+        <!-- <li>
             <a [routerLink]="['/apis/guide']" (click)="removeclass('')">API</a>
-        </li>
+        </li> -->
         <li>
             <a [routerLink]="['/blog/list']" (click)="removeclass('')">Blog</a>
         </li>
