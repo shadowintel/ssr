@@ -1,0 +1,36 @@
+<section id="api_guide" style="min-height: 92vh;">
+    <div class="container api-container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 request-part">
+                <h5><span>POST</span> Query Database</h5>
+                <p class="url">https://expressbackend.shadowintelligence.io/search</p>
+                <p>This will retrieve all victims based on revenue parameters</p>
+
+                <h5>HEADERS</h5>
+                <label>api-key</label>
+                <input type="text" class="url" spellcheck="false" placeholder="xxxxxxxxxxxxxx" [(ngModel)]="apiKey" />
+                <button class="btn btn-md mt-2" (click)="checkApiKey()">Valid Key</button>
+                <h5 style="margin-top: 20px;">BODY</h5>
+                <textarea class="url request-body" rows="15" spellcheck="false" [(ngModel)]="getQuery"></textarea>
+                <button class="btn btn-md mt-2" (click)="searchData()" [disabled]="invalidQuery">Query Data</button>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="response-part">
+                    <div class="response-header">
+                        <div class="response-title">Response</div>
+                        <div class="response-status">
+                            <div class="response-status" title="200 OK">
+                                {{responseStatus}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="response-body">
+                        <textarea class="response-body-textarea" spellcheck="false" [(ngModel)]="responseBody" readonly></textarea>
+                    </div>
+                    <button class="btn btn-md mt-2" (click)="exportToJsonFile(responseBody)">Export Json</button>
+                    <!-- <button class="btn btn-md mt-2" (click)="exportToCsvFile(responseBody)">Export CSV</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
