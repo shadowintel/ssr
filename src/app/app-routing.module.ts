@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
   },
   {
-    path: 'apis',
+    path: 'api',
     loadChildren: () => import('./apis/apis.module').then(m => m.ApisModule)
   },
   {
