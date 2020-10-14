@@ -8,7 +8,7 @@
 
 @media (min-width: 400px) {
     .api-container {
-        height: calc(92vh - 120px);
+        min-height: calc(92vh - 120px);
     }
 }
 
@@ -53,7 +53,7 @@
     .request-body {
         width: 100%;
     }
-    button {
+    button.api-check {
         margin-top: 0px !important;
     }
 }
@@ -63,6 +63,16 @@ button {
     color: #fff;
     font-size: 12px;
     float: right;
+}
+
+button.calendar {
+    position: absolute;
+    right: 14px;
+    top: 0;
+    height: 31px;
+    background: lightgrey;
+    color: #1acea1;
+    border: 1px solid #e6e6e6;
 }
 
 .response-part {

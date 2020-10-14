@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import * as e from 'express';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApidocService } from 'src/app/_services';
 
@@ -8,6 +11,7 @@ import { ApidocService } from 'src/app/_services';
   styleUrls: ['./guide.component.scss']
 })
 export class GuideComponent implements OnInit {
+  model: NgbDateStruct;
 
   requestJsonBody = {
     "ransomware": "Maze",
@@ -29,28 +33,36 @@ export class GuideComponent implements OnInit {
   responseStatus = '';
   invalidQuery = false;
   responseBody: any;
+  queryForm: FormGroup;
+
   constructor(
     private apiDocService: ApidocService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
   ) {
 
   }
 
   ngOnInit(): void {
+    this.initForm();
   }
 
-  get getQuery() {
-    return JSON.stringify(this.requestJsonBody, null, 2);
-  }
-
-  set getQuery(v) {
-    try {
-      this.requestJsonBody = JSON.parse(v);
-      this.invalidQuery = false;
-    } catch (e) {
-      this.invalidQuery = true;
-      console.log("error occored while you were typing the JSON", this.invalidQuery);
-    }
+  initForm() {
+    this.queryForm = this.formBuilder.group({
+      ransomware: [''],
+      title: [''],
+      startDate: [''],
+      endDate: [''],
+      industry: [''],
+      country: [''],
+      siteUrl: [''],
+      iso2: [''],
+      sector: [''],
+      minRevenue: [],
+      maxRevenue: [],
+      minEmployees: [],
+      maxEmployees: [],
+    });
   }
 
   checkApiKey() {
@@ -69,7 +81,23 @@ export class GuideComponent implements OnInit {
   }
 
   searchData() {
-    this.apiDocService.serach(JSON.parse(this.getQuery), this.apiKey).subscribe((res: any) => {
+    this.queryForm.value.startDate
+    console.log('form value: ', this.queryForm.value)
+    let getQuery = {};
+    for (const [key, value] of Object.entries(this.queryForm.value)) {
+      if (value !== null) {
+        if (key == 'startDate' || key == 'endDate') {
+          if (value['year']) {
+            getQuery[key] = value['year'] + '-' + value['month'] + '-' + value['day']
+          }
+        } else {
+          getQuery[key] = value;
+        }
+      }
+    }
+    console.log(getQuery);
+
+    this.apiDocService.serach(getQuery, this.apiKey).subscribe((res: any) => {
       this.responseStatus = 'OK 200';
       console.log('query result: ', res);
       const searchResult = res.result.map((item: any) => {
@@ -83,7 +111,6 @@ export class GuideComponent implements OnInit {
       this.responseBody = JSON.stringify(error, null, 2);
       console.log('error to query data: ', error);
     })
-    console.log('getQuery', JSON.parse(this.getQuery))
   }
 
   exportToJsonFile(dataStr) {
@@ -134,10 +161,10 @@ export class GuideComponent implements OnInit {
     linkElement.click();
   }
 
-  timeConverter(UNIX_timestamp){
+  timeConverter(UNIX_timestamp) {
     var a = new Date(UNIX_timestamp * 1000);
     var year = a.getFullYear();
-    var month = a.getMonth()+1;
+    var month = a.getMonth() + 1;
     var date = a.getDate();
     var time = year + '-' + month + '-' + date;
     return time;

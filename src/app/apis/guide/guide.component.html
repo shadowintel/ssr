@@ -9,10 +9,138 @@
                 <h5>HEADERS</h5>
                 <label>API-Key</label>
                 <input type="text" class="url" spellcheck="false" placeholder="xxxxxxxxxxxxxx" [(ngModel)]="apiKey" />
-                <button class="btn btn-md mt-2" (click)="checkApiKey()">Valid Key</button>
+                <button class="btn btn-md mt-2 api-check" (click)="checkApiKey()">Valid Key</button>
                 <h5 style="margin-top: 20px;">BODY</h5>
-                <textarea class="url request-body" rows="15" spellcheck="false" [(ngModel)]="getQuery"></textarea>
-                <button class="btn btn-md mt-2" (click)="searchData()" [disabled]="invalidQuery">Query Data</button>
+                <div class="query-form">
+                    <form class="text-left border border-light" [formGroup]="queryForm">
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Ransomware:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" formControlName="ransomware" class="url w-100" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Title:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" formControlName="title" class="url w-100" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Start Date:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="url w-100" formControlName="startDate" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="ri-calendar-fill"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>End Date:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="url w-100" formControlName="endDate" placeholder="yyyy-mm-dd" name="edp" ngbDatepicker #ed="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="ed.toggle()" type="button"><i class="ri-calendar-fill"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Industry:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" formControlName="industry" class="url w-100" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Country:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" formControlName="country" class="url w-100" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Site Url:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" formControlName="siteUrl" class="url w-100" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>ISO2:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" formControlName="iso2" class="url w-100" />
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Sector:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" formControlName="sector" class="url w-100" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Min Revenue:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" formControlName="minRevenue" class="url w-100" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Max Revenue:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" formControlName="maxRevenue" class="url w-100" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Min Employees:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" formControlName="minEmployees" class="url w-100" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label>Max Employees:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" formControlName="maxEmployees" class="url w-100" />
+                            </div>
+                        </div>
+                        <button class="btn btn-md mt-2" type="submit" (click)="searchData()">Query Data</button>
+                    </form>
+                </div>
+
+                <!-- <textarea class="url request-body" rows="15" spellcheck="false" [(ngModel)]="getQuery"></textarea> -->
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="response-part">
