@@ -73,7 +73,10 @@ export class GuideComponent implements OnInit {
       this.spinner.hide();
       this.responseBody = JSON.stringify(res, null, 2)
     }, (error) => {
-      console.log('error to check api key: ', error);
+      // console.log('error to check api key: ', error);
+      delete error.message;
+      delete error.url;
+      error.error = 'Invalid API Key';
       this.responseBody = JSON.stringify(error, null, 2);
       this.spinner.hide();
       this.responseStatus = error.statusText + ' ' + error.status;
@@ -107,6 +110,9 @@ export class GuideComponent implements OnInit {
       })
       this.responseBody = JSON.stringify(searchResult, null, 2)
     }, (error) => {
+      delete error.message;
+      delete error.url;
+      error.error = 'Invalid API Key';
       this.responseStatus = error.statusText + ' ' + error.status;
       this.responseBody = JSON.stringify(error, null, 2);
       console.log('error to query data: ', error);
